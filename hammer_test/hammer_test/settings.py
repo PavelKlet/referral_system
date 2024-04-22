@@ -81,16 +81,27 @@ SPECTACULAR_SETTINGS = {
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#        'default': {
+#            'ENGINE': 'django.db.backends.postgresql',
+#            'NAME': 'hammers',
+#            'USER': 'postgres',
+#            'PASSWORD': '123',
+#            'HOST': 'localhost',
+#            'PORT': '5432',
+#        }
+#    }
+
 DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'hammers',
-           'USER': 'postgres',
-           'PASSWORD': '123',
-           'HOST': 'localhost',
-           'PORT': '5432',
-       }
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'hammers',
+        'USER': 'PavelKlet',
+        'PASSWORD': 'qwert456',
+        'HOST': 'PavelKlet.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
+    }
+}
 
 
 # Password validation
