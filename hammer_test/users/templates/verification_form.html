@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Phone Verification{% endblock %}
+
+{% block content %}
+    <form id="verificationForm">
+        {% csrf_token %}
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phone_number">
+        <button type="button" onclick="submitForm()">Request Verification Code</button>
+    </form>
+    <script>
+        function submitForm() {
+            var formData = new FormData(document.getElementById('verificationForm'));
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '{% url 'request_verification' %}', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    window.location.href = '{% url 'verify_phone' %}';
+                } else {
+                    alert('Error: ' + xhr.statusText);
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
+{% endblock %}

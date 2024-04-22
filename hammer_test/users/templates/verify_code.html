@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Verification Code{% endblock %}
+
+{% block content %}
+    <h2>Enter Verification Code</h2>
+    <form id="codeForm">
+        {% csrf_token %}
+        <div>
+            <label for="id_code">Verification Code:</label>
+            <input type="text" id="id_code" name="code">
+        </div>
+        <button type="button" onclick="submitCode()">Submit</button>
+    </form>
+    <script>
+       function submitCode() {
+        var formData = new FormData(document.getElementById('codeForm'));
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '{% url "enter_code" %}', true);
+        xhr.onload = function() {
+        if (xhr.status === 200) {
+            window.location.href = '{% url "profile_html" %}';
+        } else {
+            alert('Error: ' + xhr.statusText);
+        }
+        };
+            xhr.send(formData);
+            return false;
+        }
+        document.getElementById('codeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            submitCode();
+        });
+    </script>
+{% endblock %}

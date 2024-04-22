@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <h1>Профиль</h1>
+    <p>Ваш номер телефона: {{ profile.phone_number }}</p>
+    <p>Ваш invite code: {{ profile.invite_code }}</p>
+    {% if profile.entered_invite_code %}
+        <p>Вы ввели invite code: {{ profile.entered_invite_code }}</p>
+    {% endif %}
+    {% if profile.invited_users %}
+        <h2>Пользователи, которые ввели ваш invite code:</h2>
+        <ul>
+        {% for invited_user in profile.invited_users %}
+            <p>{{ invited_user.phone_number }}</p>
+        {% empty %}
+            <p>Нет пользователей, которые ввели ваш invite code.</p>
+        {% endfor %}
+        </ul>
+    {% endif %}
+   <form id="profileForm" onsubmit="return sendFormData();">
+    {% csrf_token %}
+    <label for="entered_invite_code">Enter another user's invite code:</label>
+    <input type="text" id="entered_invite_code" name="entered_invite_code">
+    <button type="submit">Enter</button>
+   </form>
+    <script>
+       function sendFormData() {
+            var formData = new FormData(document.getElementById('profileForm'));
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '{% url "profile" %}', true);
+            xhr.onload = function() {
+                alert(JSON.parse(xhr.responseText).message);
+            };
+            xhr.send(formData);
+            return false;
+        }
+    </script>
+{% endblock %}
