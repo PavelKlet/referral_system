@@ -48,7 +48,6 @@ class RequestPhoneVerificationAPIView(APIView):
         request.session['verification_code'] = verification_code
         request.session['phone_number'] = phone_number
         time.sleep(random.uniform(1, 2))
-        print("Verification code:", verification_code)
         return Response({"data": serializer.data, "code": verification_code})
 
 

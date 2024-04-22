@@ -4,6 +4,7 @@
 
 {% block content %}
     <h2>Enter Verification Code</h2>
+    <p>You verification Code: {{ request.session.verification_code }}</p>
     <form id="codeForm">
         {% csrf_token %}
         <div>
