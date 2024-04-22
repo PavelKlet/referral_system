@@ -95,7 +95,7 @@ SPECTACULAR_SETTINGS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hammers',
+        'NAME': 'PavelKlet$hammers',
         'USER': 'PavelKlet',
         'PASSWORD': 'qwert456',
         'HOST': 'PavelKlet.mysql.pythonanywhere-services.com',
